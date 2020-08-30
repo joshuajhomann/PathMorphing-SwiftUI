@@ -11,10 +11,28 @@ struct RootView: View {
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
   var body: some View {
     Group {
-      if true {
-        return Color.red
+      if horizontalSizeClass == .compact {
+        TabView {
+          NavigationView {
+            DrawingList()
+          }
+          .tabItem {
+            Image(systemName: "list.star")
+            Text("Shapes")
+          }
+          NavigationView {
+            DrawingView()
+          }
+          .tabItem {
+            Image(systemName: "pencil.circle")
+            Text("Draw")
+          }
+        }
       } else {
-        return Text("")
+        NavigationView {
+          DrawingList()
+          DrawingView()
+        }
       }
     }
   }
